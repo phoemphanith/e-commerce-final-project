@@ -1,0 +1,4 @@
+1. User Comment
+2. User Cannot view purchase history
+3. Don't know how to upload image
+4. Not clear with separate directory

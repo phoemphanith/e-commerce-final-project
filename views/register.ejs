@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/loginRegister.css" />
+  </head>
+  <body>
+    <form action="/register" method="post">
+      <div class="container">
+        <h1>Register</h1>
+        <p style="color: <%= styles %>"><%= wrong %></p>
+        <hr />
+
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="name" id="username" required />
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="username" id="email" required />
+
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          id="psw"
+          required
+          autocomplete="new-password"
+        />
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="passportRepeat" id="psw-repeat" required />
+        <hr />
+
+        <input type="checkbox" name="accept" id="accept" required />
+        <label>I accept <a href="#">Terms & Condition</a>.</label>
+
+        <button type="submit" class="registerbtn">Sign Up</button>
+        <p>Already have an account? <a href="/login">Sign in</a>.</p>
+      </div>
+    </form>
+  </body>
+</html>

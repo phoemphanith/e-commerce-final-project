@@ -1,0 +1,58 @@
+<%- include("partials/header") -%>
+</section>
+    <section id="shoppingcart">
+      <p class="routing-element"><a href="#">Home</a>/Shopping Cart</p>
+      <div class="cartcontainer">
+        <!-- TODO: Create table and checkout product -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Products</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(i=0;i<cart.length;i++){ %>
+              <% for(j=0;j<product.length;j++){ %>
+                  <% if(cart[i].productId == product[j]._id){%>
+                    <tr>
+                      <td class="table-product">
+                        <img class="table-img" src="/image/products/Photo by Atef Khaled from Pexels.jpg" alt="" />
+                        <p><%= product[j].productName %></p>
+                      </td>
+                      <td>$<%= (cart[i].totalprice/cart[i].newQuantity).toFixed(2) %></td>
+                      <td><%= cart[i].newQuantity %></td>
+                      <td>$<%= (cart[i].totalprice).toFixed(2) %></td>
+                    </tr>
+                  <% } %>
+              <% } %>
+            <% } %>
+          </tbody>
+        </table>
+        <div class="checkout-product">
+          <h4>CART TOTALS</h4>
+          <hr />
+          <h6>Shipping:</h6>
+          <p>
+            There are no shipping methods available. Please double check your address, or contact us if you need any
+            help.
+          </p>
+          <h6>CACULATE SHIPPING:</h6>
+          <form class="shipping" action="/purchase" method="post">
+            <select name="shippingCountry">
+              <option value="Cambodia">Cambodia</option>
+              <option value="Thailand">Thailand</option>
+              <option value="China">China</option>
+            </select>
+            <input type="text" placeholder="Provice/Capital City" name="shippingCity"/>
+            <input type="text" placeholder="Phone Number" name="shippingContact"/>
+            <hr />
+            <h6>Total: <%= total %>$</h6>
+            <button class="submit" name="checkout">CHECKOUT</button>
+          </form>
+        </div>
+      </div>
+    </section>
+<%- include("partials/footer") -%>

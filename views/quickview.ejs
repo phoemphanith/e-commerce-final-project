@@ -1,0 +1,130 @@
+<%- include("partials/header") -%>
+
+<div class="containerTop">
+  <h1>Shop Your Designer Dresses</h1>
+  <p>Ready to wear dresses taillored for you from online. Hurry up while stock lasts.</p>
+  <form action="" class="search">
+    <input type="text" class="searchText" placeholder="ex: nike T-shirt ..." />
+    <button class="searchBtn">Search <img class="searchIcon" src="/image/icon/loupe.png" alt="" /></button>
+  </form>
+</div>
+</section>
+<section id="feature">
+  <div class="item">
+    <div class="top">
+      <div class="content">
+        <h2>Coupon Savings</h2>
+        <p>Up to 60% off everyday essentials</p>
+      </div>
+      <img src="/image/icon/icons8-coupon-100.png" alt="" />
+    </div>
+    <a href="#">Shop Coupon</a>
+  </div>
+  <div class="item">
+    <div class="top">
+      <div class="content">
+        <h2>Free Delivery</h2>
+        <p>With selected items</p>
+      </div>
+      <img src="/image/icon/checked-truck.png" alt="" />
+    </div>
+    <a href="#">Delivery Now</a>
+  </div>
+  <div class="item">
+    <div class="top">
+      <div class="content">
+        <h2>Gift Voucher</h2>
+        <p>With personal card items</p>
+      </div>
+      <img src="/image/icon/gift--v1.png" alt="" />
+    </div>
+    <a href="#">Gift Now</a>
+  </div>
+</section>
+<hr />
+<section id="products">
+  <div class="category">
+    <a href="#" class="catElement">
+      <img src="/image/icon/icon_laptop.png" alt="" />
+      Electronics
+    </a>
+    <a href="#" class="catElement">
+      <img src="/image/icon/icon_bag-front-view.png" alt="" />
+      Hand Bags
+    </a>
+    <a href="#" class="catElement">
+      <img src="/image/icon/icon_wallet.png" alt="" />
+      Wallet
+    </a>
+    <a href="#" class="catElement active">
+      <img src="/image/icon/icon_clothes.png" alt="" />
+      Clothes
+    </a>
+  </div>
+  <div class="viewproduct">
+    <div class="viewItem">
+      <div id="column">
+        <div class="itemImg active" style="background-image: url(/image/products/Photo\ by\ Atef\ Khaled\ from\ Pexels.jpg)" alt=""></div>
+        <div class="itemImg" style="background-image: url(/image/products/Photo\ by\ Atef\ Khaled\ from\ Pexels.jpg)" alt=""></div>
+        <div class="itemImg" style="background-image: url(/image/products/Photo\ by\ Atef\ Khaled\ from\ Pexels.jpg)" alt=""></div>
+      </div>
+      <div class="viewImage" style="background-image: url(/image/products/<%= product.image %>)"></div>
+    </div>
+
+    <div class="contentView">
+      <h1><%= product.productName %></h1>
+      <% if(product.promotion === 0){ %>
+        <p class="price"><span class="normal">$<%= product.pricePerProduct %></span></p>
+      <% }else{ %>
+        <p class="price">
+          <span class="normal" style="text-decoration: solid line-through 2px;">$<%= product.pricePerProduct %></span>
+          <span class="discount">$<%= (product.pricePerProduct*product.promotion).toFixed(2)  %></span>
+        </p>
+      <% } %>
+      <p><%= product.detail %></p>
+      <form id="formDetail" action="/addcart" method="POST">
+        <div class="formItem">
+          <label>Quantity: </label>
+          <input type="number" name="quantity" value="0" min="0" max="<%= product.quantity %>" />
+        </div>
+        <div class="submitForm">
+          <button type="submit" class="addcart" name="productId" value="<%= product._id %>">Add Cart</button>
+          <button type="submit" class="buynow" value="buynow">Buy Now</button>
+        </div>
+      </form>
+      <p id="tag">Tag: T-shirt, Nike</p>
+    </div>
+  </div>
+  <div class="comment-section">
+    <h1>Comments</h1>
+    <hr />
+    <div class="comment-container">
+      <div class="profile-user" style="background-image: url(/image/products/man.jpg)"></div>
+      <div class="user-comment">
+        <h2>Anonymous</h2>
+        <p class="comment-date">Today 4:21pm - 12.06.2020</p>
+        <p class="status">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+          electronic typesetting, remaining essentially unchanged.
+        </p>
+      </div>
+    </div>
+    <div class="comment-container">
+      <div class="profile-user" style="background-image: url(/image/products/man.jpg)"></div>
+      <div class="user-comment">
+        <h2>Anonymous</h2>
+        <p class="comment-date">Today 4:21pm - 12.06.2020</p>
+        <p class="status">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      </div>
+    </div>
+    <form action="" class="commentForm">
+      <div class="containerform">
+        <input type="text" class="commentUser" placeholder="Write comment here" />
+        <button class="btnComment">Send<i class="far fa-paper-plane"></i></button>
+      </div>
+    </form>
+  </div>
+</section>
+<%- include("partials/footer") -%>
