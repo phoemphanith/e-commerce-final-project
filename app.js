@@ -27,12 +27,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //!DATABASE
-mongoose.connect("mongodb://localhost:27017/onlineshopdb", { useNewUrlParser: true, useUnifiedTopology: true });
-const adminSchema = new mongoose.Schema({
+mongoose.connect("mongodb+srv://phanith:123456789q@cluster0.utojs.mongodb.net/onlineshopdb", { useNewUrlParser: true, useUnifiedTopology: true });
+const adminUserSchema = new mongoose.Schema({
   username: String,
   password: String
 });
-const Admin = mongoose.model("Admin",adminSchema);
+const AdminUser = mongoose.model("AdminUser",adminUserSchema);
 const categorySchema = new mongoose.Schema({
   categoryName: String,
 });
@@ -117,9 +117,16 @@ app.get("/admin", (req,res)=>{
 app.get("/admin/register", (req,res)=>{
   res.render("admin/register");
 });
+app.get("/admin/products",(req,res)=>{
+  Products.find({}, (err, product) => {
+    if (!err) {
+      res.render("admin/products", { products: product });
+    }
+  });
+});
 app.post("/admin/login", (req,res)=>{
   const password = req.body.password;
-  Admin.findOne({username: req.body.username},(err,admin)=>{
+  AdminUser.findOne({username: req.body.username},(err,admin)=>{
     if(!err){
       if(admin.password === md5(password)){
         Products.find({}, (err, product) => {
@@ -134,7 +141,7 @@ app.post("/admin/login", (req,res)=>{
   });
 });
 app.post("/admin/register", (req,res)=>{
-  const admin = new Admin({
+  const admin = new AdminUser({
     username: req.body.username,
     password: md5(req.body.password)
   });
@@ -164,7 +171,7 @@ app.post("/addproduct", (req, res) => {
   });
   product.save((err) => {
     if (!err) {
-      res.redirect("/admin");
+      res.redirect("/admin/products");
     }
   });
 });
@@ -173,7 +180,7 @@ app.get("/delete/:productId", (req, res) => {
   const productID = req.params.productId;
   Products.findByIdAndDelete(productID, (err) => {
     if (!err) {
-      res.redirect("/product");
+      res.redirect("/admin/products");
     }
   });
 });
@@ -201,7 +208,7 @@ app.post("/updateproduct", (req, res) => {
     }
   }, (err) => {
     if (!err) {
-      res.redirect("/admin");
+      res.redirect("/admin/products");
     }
   });
 });
